@@ -2,6 +2,8 @@ const EventEmitter = require('events')
 
 const eventEmitter = new EventEmitter()
 
+let clipboard
+
 module.exports = {
   app: jest.fn(),
   dialog: jest.fn(),
@@ -15,16 +17,16 @@ module.exports = {
     send: jest.fn(),
   },
   match: jest.fn(),
+  BrowserWindow: function () {
+    return {
+      webContents: {
+        send: jest.fn((eventName, payload) =>
+          eventEmitter.emit(eventName, payload),
+        ),
+      },
+    }
+  },
   remote: {
-    BrowserWindow: function () {
-      return {
-        webContents: {
-          send: jest.fn((eventName, payload) =>
-            eventEmitter.emit(eventName, payload),
-          ),
-        },
-      }
-    },
     getCurrentWindow() {
       return {
         setIgnoreMouseEvents: jest.fn(),
@@ -32,4 +34,13 @@ module.exports = {
     },
   },
   require: jest.fn(),
+  clipboard: {
+    writeText: (string) => (clipboard = string),
+    readText: () => clipboard,
+  },
+  contextBridge: {
+    exposeInMainWorld: jest.fn((apiKey, { send, receive }) => {
+      window[apiKey] = { send, receive }
+    }),
+  },
 }

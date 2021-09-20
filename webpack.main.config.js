@@ -1,5 +1,6 @@
 const CopyPlugin = require('copy-webpack-plugin')
 const rules = require('./webpack.rules')
+const path = require('path')
 
 module.exports = {
   /**
@@ -15,8 +16,14 @@ module.exports = {
   devtool: false,
   resolve: {
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.css', '.json'],
+    alias: {
+      '@browser-logos': false,
+      [path.resolve(__dirname, './src/config/logos')]: false,
+    },
   },
   plugins: [
-    new CopyPlugin({ patterns: [{ from: 'src/main/static', to: 'static' }] }),
+    new CopyPlugin({
+      patterns: [{ from: 'src/shared/static', to: 'static' }],
+    }),
   ],
 }

@@ -2,75 +2,47 @@
 
 # Browserosaurus
 
-If you enjoy using Browserosaurus, please consider supporting its continued
-development.
+Browserosaurus is an open-source (MIT license), browser prompter for macOS. It
+works by setting itself as the default browser; any clicked links in non-browser
+apps are now sent to Browserosaurus where you are presented with a menu of all
+your installed browsers. You may now decide which app you’d like to continue
+opening the link with.
 
-Browserosaurus is an open-source (MIT license), Electron-based browser prompter
-for macOS. It works by setting itself as the default browser; any clicked links
-in non-browser apps are now sent to Browserosaurus where it’ll present you with
-a menu of all your installed browsers. You may now decide which browser you’d
-like to continue opening the link with.
-
-**Currently supports macOS 11.2.3**
+<img src="./screenshot.jpg" alt="screenshot" />
 
 ## Installation
 
-Installation instructions and alternatives are available on
-[https://wstone.io/browserosaurus](https://wstone.io/browserosaurus)
+Download Browserosaurus from the
+[GitHub releases page](https://github.com/will-stone/browserosaurus/releases/latest).
+Select **x64** for Intel machines, or **arm64** for Apple Silicon (M1) machines.
 
-## Development
-
-Ensure you are running the correct version of Node. The repo includes an
-`.nvmrc` file that includes the version number I use.
-
-Get repo:
-
-```
-git clone git@github.com:will-stone/browserosaurus.git
-```
-
-Move to folder:
-
-```
-cd browserosaurus
-```
-
-Install dependencies:
-
-```
-npm i
-```
-
-Run Browserosaurus in dev mode:
-
-```
-npm start
-```
-
-### Finding bundle identifier for an app
+Or use [Homebrew](https://formulae.brew.sh/cask/browserosaurus#default). Thank
+you very much to [@i0ntempest](https://github.com/i0ntempest) and
+[@tk4k](https://github.com/tk4k) for keeping this cask updated 🙏
 
 ```sh
-mdls -name kMDItemCFBundleIdentifier -r /Applications/Firefox.app
+brew install --cask browserosaurus
 ```
 
-### Browser logos
+> 🚨 **Please note that Browserosaurus only officially supports the version of
+> macOS that I currently use, see
+> [here](docs/faq.md#which-is-the-supported-version-of-macos) for details.**
 
-The browser logos are provided by an excellent project by
-[Cătălin Mariș](https://github.com/alrra):
-https://github.com/alrra/browser-logos
+## Help
 
-### Make icon.icns
+Found a bug? Please log an
+[issue](https://github.com/will-stone/browserosaurus/issues). For anything else,
+please see the documentation below or open a
+[discussion](https://github.com/will-stone/browserosaurus/discussions).
 
-To build an icns file (app icon) from `src/images/icon/icon.png`, simply run
-`npm run icns`.
+## Documentation
 
-## Publishing
+- [Changelog](https://github.com/will-stone/browserosaurus/releases)
+- [Frequently asked questions](docs/faq.md)
+- [Supporting a new browser or app](docs/supporting-a-browser-or-app.md)
+- [Setting up for development](docs/setting-up-for-development.md)
 
-App is published on GitHub, the following command will prompt to bump version
-number, package, notarize, and make installers:
+For the maintainer:
 
-```
-npm run release
-```
-
-The dmg and zip files can then be added to a GitHub release.
+- [Creating menubar icon](docs/creating-menubar-icon.md)
+- [Publishing](docs/publishing.md)
